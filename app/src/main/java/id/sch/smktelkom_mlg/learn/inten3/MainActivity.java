@@ -10,6 +10,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        findViewById(R.id.imageViewSMS)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        composeSmsMessage("Pesan dari SMk Telkom Malang");
+                    }
+                });
         findViewById(R.id.imageViewPhone)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -19,6 +26,13 @@ public class MainActivity extends AppCompatActivity {
                 });
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    private void composeSmsMessage(String message) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra("sms_body", message);
+        if (intent.resolveActivity(getPackageManager()) !=null);
     }
 
     private void dialPhoneNumber(String phoneNumber) {
